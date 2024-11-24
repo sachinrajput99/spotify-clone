@@ -62,9 +62,9 @@ export const PlaybackControls = () => {
   };
 
   return (
-    <footer className="h-16 sm:h-20 sm:h-24 bg-zinc-900 border-t border-zinc-800  sm:px-4">
+    <footer className="h-16 sm:h-24 bg-zinc-900 border-t border-zinc-800  sm:px-4">
         {/* currently playing song on mobile */}
-        <div className=" flex items-center gap-4 min-w-[180px] w-[30%]">
+        <div className=" sm:hidden flex items-center gap-4 min-w-[180px] w-[30%]">
           {currentSong && (
             <>
               <img
@@ -83,7 +83,7 @@ export const PlaybackControls = () => {
             </>
           )}
         </div>
-      <div className="mt-6 flex justify-between items-center h-full max-w-[1800px] mx-auto">
+      <div className="flex justify-between items-center h-full max-w-[1800px] mx-auto">
         {/* currently playing song on desktop */}
         <div className=" hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]">
           {currentSong && (

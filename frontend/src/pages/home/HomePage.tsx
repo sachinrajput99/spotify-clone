@@ -17,7 +17,7 @@ const HomePage = () => {
     trendingSongs,
   } = useMusicStore();
 
-  const { initializeQueue } = usePlayerStore();//initializes the queue
+  const { initializeQueue } = usePlayerStore(); //initializes the queue
 
   useEffect(() => {
     fetchFeaturedSongs();
@@ -25,7 +25,8 @@ const HomePage = () => {
     fetchTrendingSongs();
   }, [fetchFeaturedSongs, fetchMadeForYouSongs, fetchTrendingSongs]);
 
-  useEffect(() => {//adds songs on home page to the queue
+  useEffect(() => {
+    //adds songs on home page to the queue
     if (
       madeForYouSongs.length > 0 &&
       featuredSongs.length > 0 &&
@@ -36,13 +37,29 @@ const HomePage = () => {
     }
   }, [initializeQueue, madeForYouSongs, trendingSongs, featuredSongs]);
 
+  //date
+  // Create a new Date object
+  const now = new Date();
+
+  // Get the current hour
+  const hour = now.getHours();
+  let greeting;
+  if (hour >= 5 && hour < 12) {
+    greeting = "Good Morning 🌅";
+  } else if (hour >= 12 && hour < 17) {
+    greeting = "Good Afternoon 🌤️";
+  } else {
+    greeting = "Good Evening 🌃";
+  }
+
   return (
     <main className="rounded-md overflow-hidden h-full bg-gradient-to-b from-zinc-800 to-zinc-900">
       <TopBar />
       <ScrollArea className="h-[calc(100vh-180px)]">
         <div className="p-4 sm:p-6">
           <h1 className="text-2xl sm:text-3xl font-bold mb-6">
-            Good afternoon
+            
+            {greeting}
           </h1>
           <FeaturedSection />
 
