@@ -1,0 +1,6 @@
+3.49.2
+
+const users = await User.find({ clerkId: { $ne: currentUserId } });
+
+
+fetch users backend 
