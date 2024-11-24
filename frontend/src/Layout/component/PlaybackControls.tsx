@@ -62,10 +62,30 @@ export const PlaybackControls = () => {
   };
 
   return (
-    <footer className="h-20 sm:h-24 bg-zinc-900 border-t border-zinc-800 px-4">
-      <div className="flex justify-between items-center h-full max-w-[1800px] mx-auto">
-        {/* currently playing song */}
-        <div className="hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]">
+    <footer className="h-16 sm:h-20 sm:h-24 bg-zinc-900 border-t border-zinc-800  sm:px-4">
+        {/* currently playing song on mobile */}
+        <div className=" flex items-center gap-4 min-w-[180px] w-[30%]">
+          {currentSong && (
+            <>
+              <img
+                src={currentSong.imageUrl}
+                alt={currentSong.title}
+                className="w-14 h-14 object-cover rounded-md"
+              />
+              <div className="flex-1 min-w-0">
+                <div className="font-medium truncate hover:underline cursor-pointer">
+                  {currentSong.title}
+                </div>
+                <div className="text-sm text-zinc-400 truncate hover:underline cursor-pointer">
+                  {currentSong.artist}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      <div className="mt-6 flex justify-between items-center h-full max-w-[1800px] mx-auto">
+        {/* currently playing song on desktop */}
+        <div className=" hidden sm:flex items-center gap-4 min-w-[180px] w-[30%]">
           {currentSong && (
             <>
               <img
@@ -134,9 +154,33 @@ export const PlaybackControls = () => {
             >
               <Repeat className="h-4 w-4" />
             </Button>
+               {/* volume on mobile */}
+               <div className="flex  sm:hidden items-center gap-2">
+            <Button
+              size="icon"
+              variant="ghost"
+              className="hover:text-white text-zinc-400"
+            >
+              <Volume1 className="h-4 w-4" />
+            </Button>
+
+            <Slider
+              value={[volume]}
+              max={100}
+              step={1}
+              className="w-24 hover:cursor-grab active:cursor-grabbing"
+             
+              onValueChange={(value) => {
+                setVolume(value[0]);
+                if (audioRef.current) {
+                  audioRef.current.volume = value[0] / 100;
+                }
+              }}
+            />
+          </div>
           </div>
 
-          <div className="hidden sm:flex items-center gap-2 w-full">
+          <div className="flex items-center gap-2 w-full">
             <div className="text-xs text-zinc-400">
               {formatTime(currentTime)}
             </div>
@@ -149,7 +193,10 @@ export const PlaybackControls = () => {
             />
             <div className="text-xs text-zinc-400">{formatTime(duration)}</div>
           </div>
+       
+
         </div>
+        
         {/* volume controls */}
         <div className="hidden sm:flex items-center gap-4 min-w-[180px] w-[30%] justify-end">
           <Button
@@ -174,6 +221,7 @@ export const PlaybackControls = () => {
             <Laptop2 className="h-4 w-4" />
           </Button>
 
+{/* volume button */}
           <div className="flex items-center gap-2">
             <Button
               size="icon"
